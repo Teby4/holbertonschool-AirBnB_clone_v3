@@ -71,5 +71,5 @@ class FileStorage:
 
     def get(self, cls, id):
         """get"""
-        key = cls.__name__ + "." + id
-        return self.__objects.get(key, None)
+        key = "{}.{}".format(cls.__name__, id)
+        return self.__objects.get(key)

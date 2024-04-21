@@ -11,9 +11,11 @@ app = Flask(import_name=__name__)
 app.register_blueprint(app_views)
 
 @app.teardown_appcontext
-def close() -> None:
+def close():
     storage.close()
 
 
 if __name__ == '__main__':
-    app.run(host=getenv(key="HBNB_API_HOST"), port=getenv(key="HBNB_API_PORT"), threaded=True)
+    host = getenv('HBNB_API_HOST', '0.0.0.0')
+    port = int(getenv('HBNB_API_PORT', 5000))
+    app.run(host=host, port=port, threaded=True)
